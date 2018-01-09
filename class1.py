@@ -23,6 +23,8 @@ class Person:
 	def getMale(self):
 		return self.male
 
+	
+
 # instance
 person = Person()
 
