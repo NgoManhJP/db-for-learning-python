@@ -8,10 +8,8 @@ import os, time, sys, traceback    #OSの情報を得るため
 # https://www.flickr.com/services/apps/create/apply/
 flickr_api_key = ""
 secret_key = ""
-# wait_time = 1
 
 keyword = sys.argv[1] #argument value パラメータの値
-# savedir = "./" + keyword
 
 # 実際に実行してみるとたまに接続に失敗するので、失敗時にリトライするライブラリを使い
 @retry()
