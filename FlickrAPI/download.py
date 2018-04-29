@@ -6,8 +6,8 @@ import os, time, sys, traceback    #OSの情報を得るため
 
 # Flickr APIキーの情報
 # https://www.flickr.com/services/apps/create/apply/
-flickr_api_key = "7f4cb49ab13f787e95d7ae1555f31d--"
-secret_key = "24e71c0af644fb--"
+flickr_api_key = "7f4cb49ab13f787e95d7ae1555f31d28"
+secret_key = "24e71c0af644fb51"
 
 keyword = sys.argv[1] #argument value パラメータの値
 
@@ -22,11 +22,11 @@ if __name__ == '__main__':
     result = flickr.photos.search(
         #検索パラメータに値を与える
         text = keyword,         #　検索キーワード (保存フォルダ名と同じにする)
-        per_page = 40,          #　外れデータを除くので、多めに取得しておく
+        per_page = 900,          #　外れデータを除くので、多めに取得しておく
         media = 'photos',       #　検索データの種類　→　写真を指定する
         sort = 'relevance',     #　データのソート順：検索の関連順に並べる
         safe_search = 1,        #　有害コンテンツ表示しないオプション
-        extras = 'url_z, licence' # 取得したいオプション値; url_q: 画像のアドレスが入っているデータ; ライセンス情報
+        extras = 'url_s, licence' # 取得したいオプション値; url_q: 画像のアドレスが入っているデータ; ライセンス情報
     )
     photos = result['photos']
 # height_c': 800,
@@ -48,12 +48,12 @@ if __name__ == '__main__':
 # url_sq: URL of square size image
 # url_t: URL of thumbnail, 100 on longest side size image
     try:
-        if not os.path.exists('./image-data/' + keyword):
-            os.mkdir('./image-data' + keyword)
+        if not os.path.exists('./image-data-' + keyword):
+            os.mkdir('./image-data-' + keyword)
 
         for photo in photos['photo']:
-            url_q = photo['url_z']
-            filepath = './image-data' + keyword + '/' + photo['id'] + '.jpg'
+            url_q = photo['url_s']
+            filepath = './image-data-' + keyword + '/' + photo['id'] + '.jpg'
             get_photos(url_q, filepath)
 
     except Exception as e:
